@@ -9,10 +9,7 @@ RUN sed -i 's/archive/cn.archive/g' /etc/apt/sources.list
 
 RUN apt-get update
 
-RUN apt-get install -y dialog supervisor
 RUN apt-get install -y nginx php5 php5-fpm php5-mysql php5-gd php5-dev php5-snmp
-
-# RUN mkdir -p /var/log/supervisor
 
 #daemon off
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
