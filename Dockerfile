@@ -13,12 +13,18 @@ RUN apt-get install -y nginx php5 php5-fpm php5-mysql php5-gd php5-dev php5-snmp
 
 #daemon off
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+ADD etc/fastcgi.conf /etc/nginx/fastcgi.conf
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 RUN sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
-COPY static /usr/share/nginx/html
+
+RUN mkdir -p /var/app
+
+COPY app /var/app
 
 
+
+ADD etc/app.conf /etc/nginx/conf.d/app.conf
 ADD services/php-fpm.service /etc/service/php-fpm/run
 ADD services/nginx.service /etc/service/nginx/run
 
