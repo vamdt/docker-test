@@ -20,7 +20,9 @@ RUN sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
 RUN mkdir -p /var/app
 
-COPY app /var/app
+COPY apps/app /var/app
+
+RUN chown -R www-data:www-data /var/app
 
 
 
